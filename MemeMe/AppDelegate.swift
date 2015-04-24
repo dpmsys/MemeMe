@@ -8,11 +8,18 @@
 
 import UIKit
 
+struct  MeMe {
+    var toptext: String
+    var bottext: String
+    var image: UIImage?
+    var memedImage: UIImage?
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var sentMemes: [MeMe]!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
