@@ -25,15 +25,15 @@ class SentMemeViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         
-        var newMeme: MeMe!
+        //    var newMeme: MeMe!
         var image: UIImage!
         var memedImage: UIImage!
         var cnt: Int?
         
         super.viewDidLoad()
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: UIBarButtonItemStyle.Plain, target: self, action: "newMeme"))
+
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: UIBarButtonItemStyle.Plain, target: self, action: "newMeme")
         // Do any additional setup after loading the view, typically from a nib.
         
         if let cnt = sentMemes?.count {
@@ -41,14 +41,7 @@ class SentMemeViewController: UIViewController, UITableViewDelegate, UITableView
             //TODO: show my sent memes
         
         }else{
-            //            newMeme = MeMe(toptext: "top",bottext: "bottom", image: UIImage(), memedImage: UIImage())
-            
-            let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
-            
-            if let navController = self.navigationController {
-                navController.pushViewController(controller, animated: true)
-            }
-            //self.performSegueWithIdentifier("memeEditorSegue", sender: self)
+            newMeme()
         }
     }
 
@@ -59,7 +52,15 @@ class SentMemeViewController: UIViewController, UITableViewDelegate, UITableView
     //        MemeEditorViewController
     //    }
     //}
-    
+    func newMeme () {
+        
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
+        
+        if let navController = self.navigationController {
+            navController.pushViewController(controller, animated: true)
+        }
+ 
+    }
     
     // Model
     
