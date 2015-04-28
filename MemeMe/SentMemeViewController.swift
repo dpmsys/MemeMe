@@ -33,7 +33,7 @@ class SentMemeViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: UIBarButtonItemStyle.Plain, target: self, action: "newMeme")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: UIBarButtonItemStyle.Plain, target: self, action: "memeEditor")
         // Do any additional setup after loading the view, typically from a nib.
         
         if let cnt = sentMemes?.count {
@@ -41,24 +41,27 @@ class SentMemeViewController: UIViewController, UITableViewDelegate, UITableView
             //TODO: show my sent memes
         
         }else{
-            newMeme()
+            performSegueWithIdentifier("memeEditorSegue", sender: self)
+            //   memeEditor()
         }
     }
 
     
-    //  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    //    if (segue.identifier == "memeEditorSegue") {
-    //        let memeEditorVC:MemeEditorViewController = segue.destinationViewController as!
-    //        MemeEditorViewController
-    //    }
-    //}
-    func newMeme () {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "memeEditorSegue") {
+            let memeEditorVC:MemeEditorViewController = segue.destinationViewController as!
+            MemeEditorViewController
+        }
+    }
+    
+    func memeEditor() {
         
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
         
-        if let navController = self.navigationController {
-            navController.pushViewController(controller, animated: true)
-        }
+        self.presentViewController(controller, animated: true, completion: nil)
+        //       if let navController = self.navigationController {
+        //    navController.pushViewController(controller, animated: true)
+        //}
  
     }
     
