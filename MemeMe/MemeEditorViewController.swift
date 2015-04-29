@@ -12,7 +12,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     weak var activeField: UITextField!
     weak var memedImage: UIImage!
-    weak var activityController: UIActivityViewController!
     
     let memeTextAttributes = [
         NSStrokeColorAttributeName: UIColor.blackColor(),
@@ -63,17 +62,23 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
 
     
-    func memeSharedHandler (activityType: String!, completed: Bool, returnedItems: [AnyObject]!, activityError: NSError!) -> Void {
+    func memeSharedHandler (activity: String!, completed: Bool, items: [AnyObject]!, error: NSError!) {
         
-        self.save()
-        self.activityController.dismissViewControllerAnimated(true, completion: nil)
-
+        if completed {
+            self.save()
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     func save() {
         //create the meme
         
         var meme = MeMe(toptext: topText.text, bottext: botText.text, image: memeImageView.image, memedImage: memedImage)
+        
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.sentMemes.append(meme)
+        
         
     }
         
@@ -176,10 +181,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
         self.memedImage = generateMemedImage()
         
-        let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-        self.activityController.completionWithItemsHandler = self.memeSharedHandler as UIActivityViewControllerCompletionWithItemsHandler
-        
-        self.presentViewController(activityController, animated: true, completion: nil)
+        let activityVC = UIActivityViewController(activityItems: [self.memedImage], applicationActivities: nil)
+        activityVC.completionWithItemsHandler = memeSharedHandler
+        self.presentViewController(activityVC, animated: true, completion: nil)
     
     }
     

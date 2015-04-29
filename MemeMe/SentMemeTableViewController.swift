@@ -9,7 +9,7 @@
 import UIKit
 
 
-class SentMemeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SentMemeTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var sentMemes: [MeMe]!
     
@@ -20,7 +20,6 @@ class SentMemeViewController: UIViewController, UITableViewDelegate, UITableView
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
         sentMemes = appDelegate.sentMemes
-    
     }
     
     override func viewDidLoad() {
@@ -93,9 +92,11 @@ class SentMemeViewController: UIViewController, UITableViewDelegate, UITableView
         // 3. Set the images and labels in the cell with the data from the model object
         // 4. return the cell.
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("memeReuseID")
+        let cell = tableView.dequeueReusableCellWithIdentifier("SentMemesTabCell")
             as! UITableViewCell
-        cell.textLabel?.text = self.sentMemes[indexPath.row].toptext
+        cell.textLabel?.text = self.sentMemes[indexPath.row].toptext + "/" + self.sentMemes[indexPath.row].bottext
+        cell.imageView?.image = self.sentMemes[indexPath.row].memedImage
+
         
         return cell
     }
