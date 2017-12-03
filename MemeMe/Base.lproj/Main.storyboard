@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ErD-bB-uRC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ErD-bB-uRC">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HNC-DY-Msa">
-                                <rect key="frame" x="16" y="64" width="343" height="559"/>
+                                <rect key="frame" x="16" y="84" width="343" height="539"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JOD-VA-uAx">
                                 <rect key="frame" x="6" y="567" width="363" height="36"/>
@@ -33,7 +33,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrd-Dk-MZR" userLabel="TopToolbar">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="40" width="375" height="44"/>
                                 <items>
                                     <barButtonItem systemItem="action" id="Paj-ag-G0U">
                                         <connections>
@@ -124,22 +124,22 @@
                                 <exclude reference="m7J-h6-dPs"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="DAU-YC-jml"/>
-                                <exclude reference="cmw-Ix-jhv"/>
-                                <exclude reference="kkC-Wi-CcU"/>
-                                <exclude reference="9Lw-Wp-MUL"/>
-                                <exclude reference="BkV-YF-Zfe"/>
                                 <exclude reference="M2x-wa-NEe"/>
+                                <exclude reference="9rU-cQ-JGg"/>
+                                <exclude reference="V8t-Gi-5Uc"/>
+                                <exclude reference="dTf-bB-lXl"/>
                                 <exclude reference="LTQ-ek-jbe"/>
                                 <exclude reference="gAr-h2-mCA"/>
                                 <exclude reference="x7o-cO-Fsu"/>
+                                <exclude reference="9Lw-Wp-MUL"/>
+                                <exclude reference="BkV-YF-Zfe"/>
+                                <exclude reference="DAU-YC-jml"/>
+                                <exclude reference="cmw-Ix-jhv"/>
+                                <exclude reference="kkC-Wi-CcU"/>
                                 <exclude reference="fd4-8B-spn"/>
                                 <exclude reference="iMs-ua-3pL"/>
                                 <exclude reference="v2q-Ij-c9q"/>
                                 <exclude reference="xLn-KH-SK5"/>
-                                <exclude reference="9rU-cQ-JGg"/>
-                                <exclude reference="V8t-Gi-5Uc"/>
-                                <exclude reference="dTf-bB-lXl"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -155,22 +155,22 @@
                                 <include reference="rrd-Dk-MZR"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="DAU-YC-jml"/>
-                                <include reference="cmw-Ix-jhv"/>
-                                <include reference="kkC-Wi-CcU"/>
-                                <include reference="9Lw-Wp-MUL"/>
-                                <include reference="BkV-YF-Zfe"/>
                                 <include reference="M2x-wa-NEe"/>
+                                <include reference="9rU-cQ-JGg"/>
+                                <include reference="V8t-Gi-5Uc"/>
+                                <include reference="dTf-bB-lXl"/>
                                 <include reference="LTQ-ek-jbe"/>
                                 <include reference="gAr-h2-mCA"/>
                                 <include reference="x7o-cO-Fsu"/>
+                                <include reference="9Lw-Wp-MUL"/>
+                                <include reference="BkV-YF-Zfe"/>
+                                <include reference="DAU-YC-jml"/>
+                                <include reference="cmw-Ix-jhv"/>
+                                <include reference="kkC-Wi-CcU"/>
                                 <include reference="fd4-8B-spn"/>
                                 <include reference="iMs-ua-3pL"/>
                                 <include reference="v2q-Ij-c9q"/>
                                 <include reference="xLn-KH-SK5"/>
-                                <include reference="9rU-cQ-JGg"/>
-                                <include reference="V8t-Gi-5Uc"/>
-                                <include reference="dTf-bB-lXl"/>
                             </mask>
                         </variation>
                     </view>
@@ -178,6 +178,7 @@
                         <outlet property="botText" destination="JOD-VA-uAx" id="pim-iM-r9N"/>
                         <outlet property="bottomToolbar" destination="HsB-j3-0R1" id="DLk-by-oDf"/>
                         <outlet property="cameraButton" destination="SHo-vu-fs9" id="icB-rh-mmK"/>
+                        <outlet property="cancelButton" destination="vCc-uM-yCS" id="7Pt-GP-lHw"/>
                         <outlet property="memeImageView" destination="HNC-DY-Msa" id="0sY-5W-XsE"/>
                         <outlet property="topText" destination="m7J-h6-dPs" id="q8a-C1-bUQ"/>
                         <outlet property="topToolbar" destination="rrd-Dk-MZR" id="ytE-lQ-Gxc"/>

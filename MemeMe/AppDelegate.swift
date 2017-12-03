@@ -19,7 +19,7 @@ struct  MeMe {
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var sentMemes = [MeMe]()
+  //  var sentMemes = [MeMe]()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

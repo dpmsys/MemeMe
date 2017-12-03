@@ -8,6 +8,8 @@
 	<string>Send reminders</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Get photos for MemeMe</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Save created Memes</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Get photos for MemeMe</string>
 	<key>CFBundleDevelopmentRegion</key>
