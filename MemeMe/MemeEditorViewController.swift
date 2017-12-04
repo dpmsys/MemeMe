@@ -8,8 +8,8 @@
 
 import UIKit
 import MobileCoreServices
-import Photos
-import PhotosUI
+//import Photos
+//import PhotosUI
 
 class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
@@ -19,7 +19,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     let memeTextAttributes:[String:Any] = [
         NSAttributedStringKey.strokeColor.rawValue: UIColor.black,
         NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
-        NSAttributedStringKey.font.rawValue: UIFont(name: "HelveticaNeue-CondensedBlack", size: 20)!,
+        NSAttributedStringKey.font.rawValue: UIFont(name: "HelveticaNeue-CondensedBlack", size: 45)!,
         NSAttributedStringKey.strokeWidth.rawValue: -3.0
     ]
     
@@ -66,39 +66,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.unsubscribeFromKeyboardNotifications()
         super.viewWillDisappear(animated)
     
-    }
-    
-    func checkPermission() {
-        let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
-        switch photoAuthorizationStatus {
-        case .authorized:
-            print("Access is granted by user")
-        case .notDetermined:
-            PHPhotoLibrary.requestAuthorization({
-                (newStatus) in
-                print("status is \(newStatus)")
-                if newStatus ==  PHAuthorizationStatus.authorized {
-                    /* do stuff here */
-                    print("success")
-                }
-            })
-            print("It is not determined until now")
-        case .restricted:
-            // same same
-            print("User do not have access to photo album.")
-        case .denied:
-            // same same
-            print("User has denied the permission.")
-        }
-    }
-    
-    func memeSharedHandler(_ activity: String!, completed: Bool, items: [AnyObject]!, error: NSError!) {
-        
-        if completed {
-            //     self.save()
-            self.dismiss(animated: true, completion: nil)
-        }
-        
     }
     
     func save() {
@@ -155,18 +122,19 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // imagePicker delegates
     
     
-    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    @objc func imagePickerController(_ picker: UIImagePickerController,
+                                     didFinishPickingMediaWithInfo info: [String : Any]) {
 
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.memeImageView.image = image
         }
         picker.dismiss(animated: true, completion: nil)
-        dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
     }
 
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    @objc func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
-        dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
     }
     
     // Move the view up when the keyboard comes out and covers text field
@@ -207,38 +175,37 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     
-    override func didReceiveMemoryWarning() {
+    @objc override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
     @IBAction func shareMeme(_ sender: AnyObject) {
 
-        memedImage = generateMemedImage()
+        let memedImage = generateMemedImage()
         
-        let activityVC = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-        activityVC.completionWithItemsHandler = {(activityTypeChosen:UIActivityType?, completed:Bool, returnedItems:[Any]?, error:NSError?) -> Void in
+        if (memedImage != nil) {
+            self.unsubscribeFromKeyboardNotifications()
+            let activityVC = UIActivityViewController(activityItems: [memedImage as Any], applicationActivities: nil)
+            activityVC.completionWithItemsHandler = {(activityTypeChosen:UIActivityType?, completed:Bool, returnedItems:[Any]?, error:NSError?) -> Void in
             
-            // ReturnedItems is an array of modified NSExtensionItem, or nil of nothing modified
-            // if (activityType == nil) User dismissed the view controller without making a selection.
-            
-            // Dismiss the view controller we presented
-            // (assume a reference to it was stored in self.activityVC)
-            
-            activityVC.dismiss(animated: true, completion: {
                 if activityTypeChosen == nil {
-                    NSLog("User canceled without choosing anything")
+                    NSLog("%s\n","user cancelled")
+                } else {
+                    if completed {
+                        NSLog("User chose an activity and iOS sent it to that other app/service/whatever OK")
+                    } else {
+                        NSLog("There was an error: \(String(describing: error))")
+                    }
                 }
-                else if completed {
-                    NSLog(")User chose an activity and iOS sent it to that other app/service/whatever OK")
-                }
-                else {
-                    NSLog("There was an error: \(String(describing: error))")
-                }
-            })
+                activityVC.dismiss(animated: true, completion: nil)
+                self.subscribeToKeyboardNotifications()
             } as? UIActivityViewControllerCompletionWithItemsHandler
 
-        self.present(activityVC, animated: true, completion: nil)
+            self.present(activityVC, animated: true, completion: nil)
+        } else {
+            NSLog("%s","memeImage is nil")
+        }
     }
     
     @IBAction func cancelEdit(_ sender: AnyObject) {
