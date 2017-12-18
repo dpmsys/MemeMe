@@ -2,14 +2,13 @@
 //   MemeEditorViewController.swift
 //  MemeMe
 //
-//  Created by David Mulvihill on 4/12/15.
-//  Copyright (c) 2015 David Mulvihill. All rights reserved.
+//  Created by David Mulvihill on 12/1/17.
+//  Copyright (c) 2017 David Mulvihill. All rights reserved.
 //
 
 import UIKit
 import MobileCoreServices
-//import Photos
-//import PhotosUI
+import AVFoundation
 
 class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
@@ -19,7 +18,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     let memeTextAttributes:[String:Any] = [
         NSAttributedStringKey.strokeColor.rawValue: UIColor.black,
         NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
-        NSAttributedStringKey.font.rawValue: UIFont(name: "HelveticaNeue-CondensedBlack", size: 45)!,
+        NSAttributedStringKey.font.rawValue: UIFont(name: "HelveticaNeue-CondensedBlack", size: 35)!,
         NSAttributedStringKey.strokeWidth.rawValue: -3.0
     ]
     
@@ -33,17 +32,21 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     override func viewDidLoad() {
         
+        self.topText.defaultTextAttributes = memeTextAttributes
         self.topText.spellCheckingType = .no
         self.topText.autocorrectionType = .no
         self.topText.textAlignment = NSTextAlignment.center
-        self.topText.defaultTextAttributes = memeTextAttributes
+        self.topText.autocapitalizationType = .allCharacters
+        
         self.topText.text = "TOP"
         self.topText.delegate = self
 
+        self.botText.defaultTextAttributes = memeTextAttributes
         self.botText.spellCheckingType = .no
         self.botText.autocorrectionType = .no
         self.botText.textAlignment = NSTextAlignment.center
-        self.botText.defaultTextAttributes = memeTextAttributes
+        self.topText.autocapitalizationType = .allCharacters
+        
         self.botText.text = "BOTTOM"
         self.botText.delegate = self
         
@@ -66,6 +69,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.unsubscribeFromKeyboardNotifications()
         super.viewWillDisappear(animated)
     
+    }
+    
+    override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
+        updateFrame()
+        //view.setNeedsLayout()
     }
     
     func save() {
@@ -102,6 +110,19 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     }
     
+    func updateFrame() {
+        let resizedImageSize = CGSize.init(width: (memeImageView.image?.size.width)! * (memeImageView.image?.scale)!, height: (memeImageView.image?.size.height)! * (memeImageView.image?.scale)!)
+        let imageViewBounds = memeImageView.bounds
+        NSLog("imageview size: %0.1f,%0.1f Image size %0.1f,%0.1f", memeImageView.bounds.height,memeImageView.bounds.width, resizedImageSize.height,resizedImageSize.width)
+
+        let newRect = AVMakeRect(aspectRatio: resizedImageSize, insideRect: imageViewBounds)
+        NSLog("Old Frame: %0.1f,%0.1f New Frame %0.1f,%0.1f", memeImageView.bounds.height,memeImageView.bounds.width, newRect.height,newRect.width)
+        memeImageView.frame = newRect
+        memeImageView.setNeedsLayout()
+        self.view.layoutIfNeeded()
+        NSLog("image size %0.1f,%0.1f", memeImageView.frame.height,memeImageView.frame.width)
+    }
+    
     
     // textField delegates
     
@@ -127,7 +148,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.memeImageView.image = image
+            updateFrame()
         }
+        
         picker.dismiss(animated: true, completion: nil)
         //dismiss(animated: true, completion: nil)
     }
@@ -141,8 +164,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @objc func keyboardWillShow(_ notification: Notification) {
     
         let keyboardHeight = getKeyboardHeight(notification)
-        
-        if activeField.frame.origin.y > self.view.frame.maxY - keyboardHeight {
+        NSLog("KeyB1 %0.1f,%0.1f, %0.1f", keyboardHeight, activeField.frame.origin.y, self.view.frame.maxY)
+        NSLog("KeyB2 %0.1f,%0.1f", activeField.frame.height + activeField.frame.origin.y, self.view.frame.maxY)
+
+        if activeField.frame.origin.y + activeField.frame.height > self.view.frame.maxY - keyboardHeight {
             self.view.frame.origin.y -= keyboardHeight
         }
         
@@ -170,7 +195,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @objc func unsubscribeFromKeyboardNotifications() {
     
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
