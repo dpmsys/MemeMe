@@ -113,14 +113,16 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func updateFrame() {
         let resizedImageSize = CGSize.init(width: (memeImageView.image?.size.width)! * (memeImageView.image?.scale)!, height: (memeImageView.image?.size.height)! * (memeImageView.image?.scale)!)
         let imageViewBounds = memeImageView.bounds
-        NSLog("imageview size: %0.1f,%0.1f Image size %0.1f,%0.1f", memeImageView.bounds.height,memeImageView.bounds.width, resizedImageSize.height,resizedImageSize.width)
+        NSLog("imageview size: h%0.1f,w%0.1f Image size h%0.1f,w%0.1f", memeImageView.bounds.height,memeImageView.bounds.width, resizedImageSize.height,resizedImageSize.width)
 
         let newRect = AVMakeRect(aspectRatio: resizedImageSize, insideRect: imageViewBounds)
-        NSLog("Old Frame: %0.1f,%0.1f New Frame %0.1f,%0.1f", memeImageView.bounds.height,memeImageView.bounds.width, newRect.height,newRect.width)
+        NSLog("Old Frame: h%0.1f,w%0.1f New Frame h%0.1f,w%0.1f", memeImageView.bounds.height,memeImageView.bounds.width, newRect.height,newRect.width)
         memeImageView.frame = newRect
+        memeImageView.bounds = newRect
         memeImageView.setNeedsLayout()
+        self.updateViewConstraints()    
         self.view.layoutIfNeeded()
-        NSLog("image size %0.1f,%0.1f", memeImageView.frame.height,memeImageView.frame.width)
+        NSLog("image size h%0.1f,w%0.1f", memeImageView.frame.height,memeImageView.frame.width)
     }
     
     
@@ -235,6 +237,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBAction func cancelEdit(_ sender: AnyObject) {
         
         self.dismiss(animated: true, completion: nil)
+        self.loadView()
         
     }
     
