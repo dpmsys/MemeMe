@@ -50,6 +50,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.botText.text = "BOTTOM"
         self.botText.delegate = self
         
+        memeImageView.image = #imageLiteral(resourceName: "LaunchImage")
+        
         // if no camera on the device disable the camera button
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
         super.viewDidLoad()
@@ -71,27 +73,17 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     }
     
-    override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
-        updateFrame()
-        //view.setNeedsLayout()
-    }
-    
     func save() {
-        //create the meme
         
-        // var meme = MeMe(toptext: topText.text, bottext: botText.text, image: memeImageView.image, memedImage: memedImage)
-        
-        //let object = UIApplication.sharedApplication().delegate
-        // let appDelegate = object as! AppDelegate
-        //appDelegate.sentMemes.append(meme)
-        
-        
+        //create the meme object
+        let meme = MeMe(topText: topText.text!, botText: botText.text!, image: memeImageView.image, memedImage: memedImage)
+        NSLog("Meme text %s %s",meme.topText, meme.botText)
     }
         
         
     func generateMemedImage() -> UIImage? {
-        
-        //TODO: hide toolbar and navbar
+
+        // hide the toolbars
         topToolbar.isHidden = true
         bottomToolbar.isHidden = true
         
@@ -101,28 +93,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        
-        //TODO: show hidden toolbar and navbar
+        // redisplay the toolbars
         topToolbar.isHidden = false
         bottomToolbar.isHidden = false
         
         return memedImage
     
-    }
-    
-    func updateFrame() {
-        let resizedImageSize = CGSize.init(width: (memeImageView.image?.size.width)! * (memeImageView.image?.scale)!, height: (memeImageView.image?.size.height)! * (memeImageView.image?.scale)!)
-        let imageViewBounds = memeImageView.bounds
-        NSLog("imageview size: h%0.1f,w%0.1f Image size h%0.1f,w%0.1f", memeImageView.bounds.height,memeImageView.bounds.width, resizedImageSize.height,resizedImageSize.width)
-
-        let newRect = AVMakeRect(aspectRatio: resizedImageSize, insideRect: imageViewBounds)
-        NSLog("Old Frame: h%0.1f,w%0.1f New Frame h%0.1f,w%0.1f", memeImageView.bounds.height,memeImageView.bounds.width, newRect.height,newRect.width)
-        memeImageView.frame = newRect
-        memeImageView.bounds = newRect
-        memeImageView.setNeedsLayout()
-        self.updateViewConstraints()    
-        self.view.layoutIfNeeded()
-        NSLog("image size h%0.1f,w%0.1f", memeImageView.frame.height,memeImageView.frame.width)
     }
     
     
@@ -150,25 +126,23 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.memeImageView.image = image
-            updateFrame()
         }
         
         picker.dismiss(animated: true, completion: nil)
-        //dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     @objc func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
-        //dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     // Move the view up when the keyboard comes out and covers text field
+    
     @objc func keyboardWillShow(_ notification: Notification) {
     
         let keyboardHeight = getKeyboardHeight(notification)
-        NSLog("KeyB1 %0.1f,%0.1f, %0.1f", keyboardHeight, activeField.frame.origin.y, self.view.frame.maxY)
-        NSLog("KeyB2 %0.1f,%0.1f", activeField.frame.height + activeField.frame.origin.y, self.view.frame.maxY)
-
+    
         if activeField.frame.origin.y + activeField.frame.height > self.view.frame.maxY - keyboardHeight {
             self.view.frame.origin.y -= keyboardHeight
         }
@@ -236,8 +210,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBAction func cancelEdit(_ sender: AnyObject) {
         
-        self.dismiss(animated: true, completion: nil)
-        self.loadView()
+        self.viewDidLoad()
+        self.viewWillAppear(false)
         
     }
     
