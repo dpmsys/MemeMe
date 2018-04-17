@@ -30,9 +30,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var botText: UITextField!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     
-    @IBOutlet weak var imageHeight: NSLayoutConstraint!
-    @IBOutlet weak var imageWidth: NSLayoutConstraint!
-    
     override func viewDidLoad() {
         
         self.topText.defaultTextAttributes = memeTextAttributes
