@@ -14,6 +14,14 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     weak var activeField: UITextField!
     weak var memedImage: UIImage!
+    var startHeight: CGFloat!
+    var startWidth: CGFloat!
+    var workHeight: CGFloat!
+    var workWidth: CGFloat!
+    var imageSize:  CGSize!
+    var imageScale:  CGFloat!
+    var scaledImageSize: CGSize!
+    var imageFrame: CGRect!
     
     let memeTextAttributes:[String:Any] = [
         NSAttributedStringKey.strokeColor.rawValue: UIColor.black,
@@ -29,6 +37,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var topText: UITextField!
     @IBOutlet weak var botText: UITextField!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    
+    @IBOutlet weak var imageHeight: NSLayoutConstraint!
+    @IBOutlet weak var imageWidth: NSLayoutConstraint!
     
     override func viewDidLoad() {
         
@@ -51,6 +62,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.botText.delegate = self
         
         memeImageView.image = #imageLiteral(resourceName: "LaunchImage")
+        
+        startWidth = memeImageView.image?.size.width
+        startHeight = memeImageView.image?.size.height
         
         // if no camera on the device disable the camera button
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
@@ -103,7 +117,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     }
     
-    
     // textField delegates
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -122,12 +135,20 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // imagePicker delegates
     
-    
     @objc func imagePickerController(_ picker: UIImagePickerController,
                                      didFinishPickingMediaWithInfo info: [String : Any]) {
-
+        
+        
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.memeImageView.image = image
+            
+            imageSize = self.memeImageView.image?.size
+
+            imageScale = CGFloat(fminf(Float(self.memeImageView.bounds.width/imageSize.width), Float(self.memeImageView.bounds.height/imageSize.height)))
+            scaledImageSize = CGSize(width: imageSize.width*imageScale, height: imageSize.height*imageScale)
+
+            imageFrame = CGRect(x: CGFloat(roundf(Float(0.5*(self.memeImageView.bounds.width)-scaledImageSize.width))), y: CGFloat(roundf(Float(0.5*(self.memeImageView.bounds.height)-scaledImageSize.height))), width: CGFloat(roundf(Float(scaledImageSize.width))), height: CGFloat(roundf(Float(scaledImageSize.height))))
+           
         }
         
         picker.dismiss(animated: true, completion: nil)
