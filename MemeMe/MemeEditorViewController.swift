@@ -14,14 +14,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     weak var activeField: UITextField!
     weak var memedImage: UIImage!
-    var startHeight: CGFloat!
-    var startWidth: CGFloat!
-    var workHeight: CGFloat!
-    var workWidth: CGFloat!
-    var imageSize:  CGSize!
-    var imageScale:  CGFloat!
-    var scaledImageSize: CGSize!
-    var imageFrame: CGRect!
     
     let memeTextAttributes:[String:Any] = [
         NSAttributedStringKey.strokeColor.rawValue: UIColor.black,
@@ -62,9 +54,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.botText.delegate = self
         
         memeImageView.image = #imageLiteral(resourceName: "LaunchImage")
-        
-        startWidth = memeImageView.image?.size.width
-        startHeight = memeImageView.image?.size.height
         
         // if no camera on the device disable the camera button
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
@@ -141,14 +130,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.memeImageView.image = image
-            
-            imageSize = self.memeImageView.image?.size
-
-            imageScale = CGFloat(fminf(Float(self.memeImageView.bounds.width/imageSize.width), Float(self.memeImageView.bounds.height/imageSize.height)))
-            scaledImageSize = CGSize(width: imageSize.width*imageScale, height: imageSize.height*imageScale)
-
-            imageFrame = CGRect(x: CGFloat(roundf(Float(0.5*(self.memeImageView.bounds.width)-scaledImageSize.width))), y: CGFloat(roundf(Float(0.5*(self.memeImageView.bounds.height)-scaledImageSize.height))), width: CGFloat(roundf(Float(scaledImageSize.width))), height: CGFloat(roundf(Float(scaledImageSize.height))))
-           
         }
         
         picker.dismiss(animated: true, completion: nil)
@@ -203,6 +184,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         // Dispose of any resources that can be recreated.
     }
 
+    // handle social sharing of memed image
+    
     @IBAction func shareMeme(_ sender: AnyObject) {
 
         let memedImage = generateMemedImage()
