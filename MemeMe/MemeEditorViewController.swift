@@ -135,7 +135,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
     @objc func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
-        dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
     }
     
     // Move the view up when the keyboard comes out and covers text field
@@ -213,8 +213,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBAction func cancelEdit(_ sender: AnyObject) {
         
-        self.viewDidLoad()
-        self.viewWillAppear(false)
+        self.dismiss(animated: true, completion: nil)
+        //self.viewDidLoad()
+        //self.viewWillAppear(false)
         
     }
     
