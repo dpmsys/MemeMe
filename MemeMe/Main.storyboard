@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ErD-bB-uRC">
+    <dependencies>
+        <deployment version="2304" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Meme Editor View Controller-->
+        <scene sceneID="tnf-dr-7hg">
+            <objects>
+                <viewController storyboardIdentifier="MemeEditorViewController" id="ErD-bB-uRC" customClass="MemeEditorViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Xzu-Vf-Ry7"/>
+                        <viewControllerLayoutGuide type="bottom" id="c9e-V5-Eja"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QGT-sa-Whg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="300" translatesAutoresizingMaskIntoConstraints="NO" id="zrw-FR-ONz">
+                                <rect key="frame" x="110" y="141.5" width="156.5" height="384"/>
+                                <subviews>
+                                    <textField clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" clearsOnBeginEditing="YES" minimumFontSize="36" translatesAutoresizingMaskIntoConstraints="NO" id="m7J-h6-dPs">
+                                        <rect key="frame" x="0.0" y="0.0" width="156.5" height="42"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="TOP">
+                                                <attributes>
+                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="36" name=".SFNSDisplay"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" usesAttributedText="YES" clearsOnBeginEditing="YES" minimumFontSize="36" translatesAutoresizingMaskIntoConstraints="NO" id="JOD-VA-uAx">
+                                        <rect key="frame" x="0.0" y="342" width="156.5" height="42"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="BOTTOM">
+                                                <attributes>
+                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="36" name=".SFNSDisplay"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="ksx-ah-SUk">
+                                <rect key="frame" x="17" y="20" width="343" height="627"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7hl-6l-Ukb">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                        <items>
+                                            <barButtonItem title="Item" id="MF3-Xd-Ys1"/>
+                                        </items>
+                                    </toolbar>
+                                    <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HNC-DY-Msa">
+                                        <rect key="frame" x="0.0" y="44" width="343" height="539"/>
+                                    </imageView>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0BZ-Wh-SdJ">
+                                        <rect key="frame" x="0.0" y="583" width="343" height="44"/>
+                                        <items>
+                                            <barButtonItem title="Item" id="WZw-5C-p3R"/>
+                                        </items>
+                                    </toolbar>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="zrw-FR-ONz" firstAttribute="centerY" secondItem="QGT-sa-Whg" secondAttribute="centerY" id="GRq-Om-miQ"/>
+                            <constraint firstItem="zrw-FR-ONz" firstAttribute="centerX" secondItem="QGT-sa-Whg" secondAttribute="centerX" id="Q65-ZO-7Hq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="botText" destination="JOD-VA-uAx" id="pim-iM-r9N"/>
+                        <outlet property="memeImageView" destination="HNC-DY-Msa" id="0sY-5W-XsE"/>
+                        <outlet property="topText" destination="m7J-h6-dPs" id="q8a-C1-bUQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b9m-xh-Whd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2521.5" y="-262"/>
+        </scene>
+    </scenes>
+</document>
