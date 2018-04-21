@@ -36,7 +36,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         textField.autocorrectionType = .no
         textField.textAlignment = NSTextAlignment.center
         textField.autocapitalizationType = .allCharacters
-        
         textField.text = text
         textField.delegate = self
     }
