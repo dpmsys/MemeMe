@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ErD-bB-uRC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ErD-bB-uRC">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -7,6 +7,7 @@
         <deployment version="2304" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,10 +15,6 @@
         <scene sceneID="tnf-dr-7hg">
             <objects>
                 <viewController storyboardIdentifier="MemeEditorViewController" id="ErD-bB-uRC" customClass="MemeEditorViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Xzu-Vf-Ry7"/>
-                        <viewControllerLayoutGuide type="bottom" id="c9e-V5-Eja"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QGT-sa-Whg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -61,7 +58,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Rp4-kv-cex"/>
                                 </items>
                             </toolbar>
-                            <textField clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" usesAttributedText="YES" clearsOnBeginEditing="YES" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="m7J-h6-dPs">
+                            <textField clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" usesAttributedText="YES" clearsOnBeginEditing="YES" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="m7J-h6-dPs">
                                 <rect key="frame" x="20" y="120" width="334.5" height="42"/>
                                 <attributedString key="attributedText">
                                     <fragment content="TOP">
@@ -91,25 +88,26 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="rrd-Dk-MZR" firstAttribute="width" secondItem="QGT-sa-Whg" secondAttribute="width" id="1M5-Q4-J0q"/>
-                            <constraint firstItem="HNC-DY-Msa" firstAttribute="centerX" secondItem="QGT-sa-Whg" secondAttribute="centerX" id="7Yk-nF-iPq"/>
-                            <constraint firstItem="c9e-V5-Eja" firstAttribute="top" secondItem="JOD-VA-uAx" secondAttribute="bottom" constant="110" id="9IU-kE-skJ"/>
-                            <constraint firstItem="JOD-VA-uAx" firstAttribute="leading" secondItem="QGT-sa-Whg" secondAttribute="leading" constant="20" id="E6q-Su-39N"/>
-                            <constraint firstItem="c9e-V5-Eja" firstAttribute="top" secondItem="HNC-DY-Msa" secondAttribute="bottom" id="If3-17-5nZ"/>
-                            <constraint firstItem="HNC-DY-Msa" firstAttribute="top" secondItem="Xzu-Vf-Ry7" secondAttribute="bottom" id="JTf-Vf-C4W"/>
-                            <constraint firstItem="rrd-Dk-MZR" firstAttribute="top" secondItem="Xzu-Vf-Ry7" secondAttribute="bottom" id="QC2-GS-ONP"/>
-                            <constraint firstItem="JOD-VA-uAx" firstAttribute="centerX" secondItem="QGT-sa-Whg" secondAttribute="centerX" id="VNq-s7-aYY"/>
-                            <constraint firstItem="m7J-h6-dPs" firstAttribute="top" secondItem="Xzu-Vf-Ry7" secondAttribute="bottom" constant="100" id="YpC-iF-iNN"/>
+                            <constraint firstItem="HNC-DY-Msa" firstAttribute="centerX" secondItem="pk6-IP-13f" secondAttribute="centerX" id="7Yk-nF-iPq"/>
+                            <constraint firstItem="pk6-IP-13f" firstAttribute="bottom" secondItem="JOD-VA-uAx" secondAttribute="bottom" constant="110" id="9IU-kE-skJ"/>
+                            <constraint firstItem="JOD-VA-uAx" firstAttribute="leading" secondItem="pk6-IP-13f" secondAttribute="leading" constant="20" id="E6q-Su-39N"/>
+                            <constraint firstItem="pk6-IP-13f" firstAttribute="bottom" secondItem="HNC-DY-Msa" secondAttribute="bottom" id="If3-17-5nZ"/>
+                            <constraint firstItem="HNC-DY-Msa" firstAttribute="top" secondItem="pk6-IP-13f" secondAttribute="top" id="JTf-Vf-C4W"/>
+                            <constraint firstItem="rrd-Dk-MZR" firstAttribute="top" secondItem="pk6-IP-13f" secondAttribute="top" id="QC2-GS-ONP"/>
+                            <constraint firstItem="JOD-VA-uAx" firstAttribute="centerX" secondItem="pk6-IP-13f" secondAttribute="centerX" id="VNq-s7-aYY"/>
+                            <constraint firstItem="m7J-h6-dPs" firstAttribute="top" secondItem="pk6-IP-13f" secondAttribute="top" constant="100" id="YpC-iF-iNN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="HNC-DY-Msa" secondAttribute="trailing" id="cmw-Ix-jhv">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
-                            <constraint firstItem="rrd-Dk-MZR" firstAttribute="centerX" secondItem="QGT-sa-Whg" secondAttribute="centerX" id="e6L-vi-n72"/>
-                            <constraint firstItem="m7J-h6-dPs" firstAttribute="leading" secondItem="QGT-sa-Whg" secondAttribute="leading" constant="20" id="epd-cj-dfh"/>
-                            <constraint firstItem="c9e-V5-Eja" firstAttribute="top" secondItem="HsB-j3-0R1" secondAttribute="bottom" id="f9i-Dj-qdo"/>
+                            <constraint firstItem="rrd-Dk-MZR" firstAttribute="centerX" secondItem="pk6-IP-13f" secondAttribute="centerX" id="e6L-vi-n72"/>
+                            <constraint firstItem="m7J-h6-dPs" firstAttribute="leading" secondItem="pk6-IP-13f" secondAttribute="leading" constant="20" id="epd-cj-dfh"/>
+                            <constraint firstItem="pk6-IP-13f" firstAttribute="bottom" secondItem="HsB-j3-0R1" secondAttribute="bottom" id="f9i-Dj-qdo"/>
                             <constraint firstItem="HNC-DY-Msa" firstAttribute="leading" secondItem="QGT-sa-Whg" secondAttribute="leadingMargin" id="kkC-Wi-CcU"/>
-                            <constraint firstItem="m7J-h6-dPs" firstAttribute="centerX" secondItem="QGT-sa-Whg" secondAttribute="centerX" id="ll1-8h-tCA"/>
-                            <constraint firstItem="HsB-j3-0R1" firstAttribute="centerX" secondItem="QGT-sa-Whg" secondAttribute="centerX" id="szJ-0r-uTz"/>
+                            <constraint firstItem="m7J-h6-dPs" firstAttribute="centerX" secondItem="pk6-IP-13f" secondAttribute="centerX" id="ll1-8h-tCA"/>
+                            <constraint firstItem="HsB-j3-0R1" firstAttribute="centerX" secondItem="pk6-IP-13f" secondAttribute="centerX" id="szJ-0r-uTz"/>
                             <constraint firstItem="HsB-j3-0R1" firstAttribute="width" secondItem="QGT-sa-Whg" secondAttribute="width" id="tq9-LG-qHU"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="pk6-IP-13f"/>
                     </view>
                     <connections>
                         <outlet property="botText" destination="JOD-VA-uAx" id="pim-iM-r9N"/>

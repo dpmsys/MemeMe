@@ -30,37 +30,37 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var botText: UITextField!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     
-    override func viewDidLoad() {
+    func initFields(textField: UITextField, withText text: String) {
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.spellCheckingType = .no
+        textField.autocorrectionType = .no
+        textField.textAlignment = NSTextAlignment.center
+        textField.autocapitalizationType = .allCharacters
         
-        self.topText.defaultTextAttributes = memeTextAttributes
-        self.topText.spellCheckingType = .no
-        self.topText.autocorrectionType = .no
-        self.topText.textAlignment = NSTextAlignment.center
-        self.topText.autocapitalizationType = .allCharacters
-        
-        self.topText.text = "TOP"
-        self.topText.delegate = self
-
-        self.botText.defaultTextAttributes = memeTextAttributes
-        self.botText.spellCheckingType = .no
-        self.botText.autocorrectionType = .no
-        self.botText.textAlignment = NSTextAlignment.center
-        self.topText.autocapitalizationType = .allCharacters
-        
-        self.botText.text = "BOTTOM"
-        self.botText.delegate = self
-        
+        textField.text = text
+        textField.delegate = self
+    }
+    
+    func initScreen() {
+        initFields(textField: topText, withText: "TOP")
+        initFields(textField: botText, withText: "BOTTOM")
         memeImageView.image = #imageLiteral(resourceName: "LaunchImage")
-        
+    }
+
+    override func viewDidLoad() {
+     
+        super.viewDidLoad()
+        initScreen()
+
         // if no camera on the device disable the camera button
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
-        super.viewDidLoad()
         
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         
+        super.viewWillAppear(animated)
         //Subscribe to the keyboard notifications, to allow the view to move when occluded by keyboard
         self.subscribeToKeyboardNotifications()
         
@@ -68,9 +68,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     override func viewWillDisappear(_ animated: Bool) {
 
-        self.unsubscribeFromKeyboardNotifications()
         super.viewWillDisappear(animated)
-    
+        self.unsubscribeFromKeyboardNotifications()
+
     }
     
     func save() {
@@ -80,12 +80,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         NSLog("Meme text %s %s",meme.topText, meme.botText)
     }
         
-        
+    func hideToolBars(_ hide: Bool) {
+        topToolbar.isHidden = hide
+        bottomToolbar.isHidden = hide
+    }
+    
     func generateMemedImage() -> UIImage? {
 
         // hide the toolbars
-        topToolbar.isHidden = true
-        bottomToolbar.isHidden = true
+        hideToolBars(true)
         
         // Render view to an image
         //UIGraphicsBeginImageContext(self.view.frame.size)
@@ -96,8 +99,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         UIGraphicsEndImageContext()
         
         // redisplay the toolbars
-        topToolbar.isHidden = false
-        bottomToolbar.isHidden = false
+        hideToolBars(false)
         
         return memedImage
     
@@ -165,7 +167,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @objc func subscribeToKeyboardNotifications() {
         
         NotificationCenter.default.addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(MemeEditorViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
@@ -188,7 +189,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let memedImage = generateMemedImage()
         
         if (memedImage != nil) {
-            self.unsubscribeFromKeyboardNotifications()
+
             let activityVC = UIActivityViewController(activityItems: [memedImage as Any], applicationActivities: nil)
             activityVC.completionWithItemsHandler = {(activityTypeChosen:UIActivityType?, completed:Bool, returnedItems:[Any]?, error:NSError?) -> Void in
             
@@ -197,12 +198,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 } else {
                     if completed {
                         NSLog("User chose an activity and iOS sent it to that other app/service/whatever OK")
+                        self.save();
                     } else {
                         NSLog("There was an error: \(String(describing: error))")
                     }
                 }
                 activityVC.dismiss(animated: true, completion: nil)
-                self.subscribeToKeyboardNotifications()
+
             } as? UIActivityViewControllerCompletionWithItemsHandler
 
             self.present(activityVC, animated: true, completion: nil)
@@ -212,30 +214,31 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     @IBAction func cancelEdit(_ sender: AnyObject) {
+  
+        initScreen()
+    
+    }
+    
+    func presentImagePickerWith(sourceType: UIImagePickerControllerSourceType) {
         
-        self.viewDidLoad()
-        self.viewWillAppear(false)
+        let imagePicker = UIImagePickerController()
         
+        imagePicker.delegate = self
+        imagePicker.sourceType = sourceType
+        imagePicker.mediaTypes = [kUTTypeImage as String]
+        present(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func pickImageFromCamera(_ sender: Any) {
     
-        let imagePicker = UIImagePickerController()
-        
-        imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.camera
-        imagePicker.mediaTypes = [kUTTypeImage as String]
-        present(imagePicker, animated: true, completion: nil)
+        presentImagePickerWith(sourceType: UIImagePickerControllerSourceType.camera)
+
     }
 
     @IBAction func pickAnImage(_ sender: Any) {
         
-        let imagePicker = UIImagePickerController()
-        
-        imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        imagePicker.mediaTypes = [kUTTypeImage as String]
-        present(imagePicker, animated: true, completion: nil)
+        presentImagePickerWith(sourceType: UIImagePickerControllerSourceType.photoLibrary)
+
     }
 }
 
