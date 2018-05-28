@@ -9,9 +9,15 @@
 import Foundation
 import UIKit
 
+
+
 struct  MeMe {
     var topText: String
     var botText: String
-    var image: UIImage?
-    var memedImage: UIImage?
+    var image: UIImage
+    var memedImage: UIImage
 }
+var memeLocker : [MeMe] = []
+var selected : Int = 0
+var collectionModified: Bool = false
+var tableModified: Bool = false

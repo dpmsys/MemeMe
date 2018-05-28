@@ -9,6 +9,7 @@
 import UIKit
 import MobileCoreServices
 import AVFoundation
+import os.log
 
 class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
@@ -72,11 +73,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
     }
     
-    func save() {
+    func save(memedImage: UIImage) {
         
         //create the meme object
-        let meme = MeMe(topText: topText.text!, botText: botText.text!, image: memeImageView.image, memedImage: memedImage)
-        NSLog("Meme text %s %s",meme.topText, meme.botText)
+        let meme = MeMe(topText: topText.text!, botText: botText.text!, image: (memeImageView.image)!, memedImage: memedImage)
+        memeLocker.append(meme)
+        collectionModified = true
+        tableModified = true
     }
         
     func hideToolBars(_ hide: Bool) {
@@ -131,7 +134,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         }
         
         picker.dismiss(animated: true, completion: nil)
-        dismiss(animated: true, completion: nil)
+    //    dismiss(animated: true, completion: nil)
     }
 
     @objc func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -185,41 +188,41 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBAction func shareMeme(_ sender: AnyObject) {
 
-        let memedImage = generateMemedImage()
-        
+        unsubscribeFromKeyboardNotifications()
+        let memedImage:UIImage! = generateMemedImage()
+
         if (memedImage != nil) {
 
-            let activityVC = UIActivityViewController(activityItems: [memedImage as Any], applicationActivities: nil)
-            activityVC.completionWithItemsHandler = {(activityTypeChosen:UIActivityType?, completed:Bool, returnedItems:[Any]?, error:NSError?) -> Void in
+            let activityVC = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+            activityVC.completionWithItemsHandler = {(activityTypeChosen:UIActivityType?, completed:Bool, returnedItems:[Any]?, error:Error?) -> Void in
             
-                if activityTypeChosen == nil {
-                    NSLog("%s\n","user cancelled")
-                } else {
-                    if completed {
-                        NSLog("User chose an activity and iOS sent it to that other app/service/whatever OK")
-                        self.save();
+                
+                    
+                    if activityTypeChosen == nil {
+                        NSLog("this is where chosen activity is Nil")
                     } else {
-                        NSLog("There was an error: \(String(describing: error))")
+                        if completed {
+                            self.save(memedImage: memedImage);
+                        } else {
+                           NSLog("There was an error: \(String(describing: error))")
+                        }
                     }
-                }
                 activityVC.dismiss(animated: true, completion: nil)
-
-            } as? UIActivityViewControllerCompletionWithItemsHandler
+                self.dismiss(animated: true, completion: nil)
+            }
 
             self.present(activityVC, animated: true, completion: nil)
         } else {
             NSLog("%s","memeImage is nil")
         }
+        subscribeToKeyboardNotifications()
     }
     
     @IBAction func cancelEdit(_ sender: AnyObject) {
         
         self.dismiss(animated: true, completion: nil)
-        //self.viewDidLoad()
-        //self.viewWillAppear(false)
+        initScreen()
         
-    }
-    
     }
     
     func presentImagePickerWith(sourceType: UIImagePickerControllerSourceType) {

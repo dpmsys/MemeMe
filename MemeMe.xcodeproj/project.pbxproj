@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06B65EA920BA682300FC3049 /* MemeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B65EA820BA682300FC3049 /* MemeCollectionViewCell.swift */; };
+		06B65EAB20BB145D00FC3049 /* MemeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B65EAA20BB145D00FC3049 /* MemeTableViewCell.swift */; };
+		06B65EAD20BB969100FC3049 /* MemeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B65EAC20BB969100FC3049 /* MemeDetailViewController.swift */; };
 		06E64EED2086CAD200644EB7 /* SentMemeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E64EEC2086CAD200644EB7 /* SentMemeTableViewController.swift */; };
 		06E64EEF2086CAFE00644EB7 /* SentMemeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E64EEE2086CAFE00644EB7 /* SentMemeCollectionViewController.swift */; };
 		FC0A7E3B1ADAD017009BD640 /* MemeEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A7E3A1ADAD017009BD640 /* MemeEditorViewController.swift */; };
@@ -29,6 +32,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06B65EA820BA682300FC3049 /* MemeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeCollectionViewCell.swift; sourceTree = "<group>"; };
+		06B65EAA20BB145D00FC3049 /* MemeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeTableViewCell.swift; sourceTree = "<group>"; };
+		06B65EAC20BB969100FC3049 /* MemeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeDetailViewController.swift; sourceTree = "<group>"; };
 		06E64EEC2086CAD200644EB7 /* SentMemeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentMemeTableViewController.swift; sourceTree = "<group>"; };
 		06E64EEE2086CAFE00644EB7 /* SentMemeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentMemeCollectionViewController.swift; sourceTree = "<group>"; };
 		FC0A7E3A1ADAD017009BD640 /* MemeEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeEditorViewController.swift; sourceTree = "<group>"; };
@@ -85,10 +91,13 @@
 			children = (
 				FCE4FAA21ACBA30700F5A955 /* AppDelegate.swift */,
 				FCE4FAA61ACBA30700F5A955 /* Main.storyboard */,
+				06B65EAC20BB969100FC3049 /* MemeDetailViewController.swift */,
 				06E64EEC2086CAD200644EB7 /* SentMemeTableViewController.swift */,
 				06E64EEE2086CAFE00644EB7 /* SentMemeCollectionViewController.swift */,
 				FC0A7E3A1ADAD017009BD640 /* MemeEditorViewController.swift */,
 				FCC247311AE742E10029C6FB /* Meme.swift */,
+				06B65EAA20BB145D00FC3049 /* MemeTableViewCell.swift */,
+				06B65EA820BA682300FC3049 /* MemeCollectionViewCell.swift */,
 				FCE4FAA91ACBA30800F5A955 /* Images.xcassets */,
 				FCE4FAAB1ACBA30800F5A955 /* LaunchScreen.xib */,
 				FCE4FAA01ACBA30700F5A955 /* Supporting Files */,
@@ -225,11 +234,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06B65EA920BA682300FC3049 /* MemeCollectionViewCell.swift in Sources */,
 				FC0A7E3B1ADAD017009BD640 /* MemeEditorViewController.swift in Sources */,
 				06E64EEF2086CAFE00644EB7 /* SentMemeCollectionViewController.swift in Sources */,
 				FCC247321AE742E10029C6FB /* Meme.swift in Sources */,
+				06B65EAB20BB145D00FC3049 /* MemeTableViewCell.swift in Sources */,
 				FCE4FAA31ACBA30700F5A955 /* AppDelegate.swift in Sources */,
 				06E64EED2086CAD200644EB7 /* SentMemeTableViewController.swift in Sources */,
+				06B65EAD20BB969100FC3049 /* MemeDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +332,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
+				"MTL_ENABLE_DEBUG_INFO[sdk=iphonesimulator*]" = NO;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -370,6 +383,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
