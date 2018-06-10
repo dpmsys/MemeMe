@@ -30,6 +30,7 @@ class SentMemeTableViewController:  UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return memeLocker.count
     }
     
