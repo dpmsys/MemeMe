@@ -57,7 +57,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
@@ -104,7 +103,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         hideToolBars(false)
         
         return memedImage
-    
     }
     
     // textField delegates
@@ -133,13 +131,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             self.memeImageView.image = image
         }
         
-        picker.dismiss(animated: true, completion: nil)
-    //    dismiss(animated: true, completion: nil)
+        picker.dismiss(animated: true, completion: nil)    //    dismiss(animated: true, completion: nil)
     }
 
     @objc func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-        //dismiss(animated: true, completion: nil)
+        picker.dismiss(animated: true, completion: nil)        //dismiss(animated: true, completion: nil)
     }
     
     // Move the view up when the keyboard comes out and covers text field
@@ -151,9 +147,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         if activeField.frame.origin.y + activeField.frame.height > self.view.frame.maxY - keyboardHeight {
             self.view.frame.origin.y -= keyboardHeight
         }
-        
     }
-    
+
     @objc func keyboardWillHide(_ notification: Notification) {
         
         self.view.frame.origin.y = 0.0
@@ -178,7 +173,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
-    
     @objc override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -196,8 +190,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             let activityVC = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
             activityVC.completionWithItemsHandler = {(activityTypeChosen:UIActivityType?, completed:Bool, returnedItems:[Any]?, error:Error?) -> Void in
             
-                
-                    
                     if activityTypeChosen == nil {
                         NSLog("this is where chosen activity is Nil")
                     } else {
@@ -210,7 +202,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 activityVC.dismiss(animated: true, completion: nil)
                 self.dismiss(animated: true, completion: nil)
             }
-
+            
             self.present(activityVC, animated: true, completion: nil)
         } else {
             NSLog("%s","memeImage is nil")
@@ -222,7 +214,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         self.dismiss(animated: true, completion: nil)
         initScreen()
-        
     }
     
     func presentImagePickerWith(sourceType: UIImagePickerControllerSourceType) {

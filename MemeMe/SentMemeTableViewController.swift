@@ -17,10 +17,9 @@ class SentMemeTableViewController:  UITableViewController {
         super.viewDidLoad()
         self.tableView.rowHeight = 150
         self.tableView.separatorStyle = .none
-        if memeLocker.count == 0 {
-            performSegue(withIdentifier: "EditorSegue", sender: nil)
-        }
+        self.tableView.contentMode = .scaleAspectFit
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if tableModified {

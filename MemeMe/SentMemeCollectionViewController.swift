@@ -15,6 +15,7 @@ class SentMemeCollectionViewController:  UICollectionViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        collectionView?.contentMode = .scaleAspectFit
         
         if collectionModified {
             collectionModified = false

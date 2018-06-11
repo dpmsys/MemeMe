@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -46,15 +45,16 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Jy6-8B-8F3" userLabel="Name Label">
-                                            <rect key="frame" x="144" y="70" width="215" height="20"/>
+                                            <rect key="frame" x="158" y="70" width="201" height="20"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eaa-Pb-IWL" userLabel="Meme Image View">
-                                            <rect key="frame" x="0.0" y="11" width="120" height="156"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eaa-Pb-IWL" userLabel="Meme Image View">
+                                            <rect key="frame" x="0.0" y="11" width="134" height="134"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="120" id="xW7-l6-oGz"/>
+                                                <constraint firstAttribute="height" constant="134" id="QIR-HE-2pA"/>
+                                                <constraint firstAttribute="width" constant="134" id="xW7-l6-oGz"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
@@ -63,7 +63,7 @@
                                         <constraint firstItem="eaa-Pb-IWL" firstAttribute="top" secondItem="HMi-tm-41J" secondAttribute="topMargin" id="6F7-1B-s5C"/>
                                         <constraint firstItem="Jy6-8B-8F3" firstAttribute="top" secondItem="HMi-tm-41J" secondAttribute="topMargin" constant="59" id="Com-aZ-XHF"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="Jy6-8B-8F3" secondAttribute="bottom" constant="55" id="Hz6-Dm-EWF"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="eaa-Pb-IWL" secondAttribute="bottom" constant="-22" id="IXp-tZ-NWf"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="eaa-Pb-IWL" secondAttribute="bottom" id="IXp-tZ-NWf"/>
                                         <constraint firstItem="eaa-Pb-IWL" firstAttribute="leading" secondItem="HMi-tm-41J" secondAttribute="leading" id="YQm-oi-wei"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Jy6-8B-8F3" secondAttribute="trailing" constant="35" id="hgw-zd-EJN"/>
                                     </constraints>
@@ -150,16 +150,16 @@
                                     <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RNQ-9u-biP">
-                                            <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RNQ-9u-biP">
+                                            <rect key="frame" x="0.0" y="0.0" width="172" height="172"/>
                                         </imageView>
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="RNQ-9u-biP" firstAttribute="height" secondItem="hup-Mm-658" secondAttribute="height" id="1oe-Zy-TNd"/>
-                                    <constraint firstItem="RNQ-9u-biP" firstAttribute="width" secondItem="hup-Mm-658" secondAttribute="width" id="dJC-J3-oFx"/>
-                                    <constraint firstItem="RNQ-9u-biP" firstAttribute="centerX" secondItem="hup-Mm-658" secondAttribute="centerX" id="lS4-cp-1L5"/>
-                                    <constraint firstItem="RNQ-9u-biP" firstAttribute="centerY" secondItem="hup-Mm-658" secondAttribute="centerY" id="vUo-Li-x52"/>
+                                    <constraint firstItem="RNQ-9u-biP" firstAttribute="leading" secondItem="hup-Mm-658" secondAttribute="leading" id="7i0-N4-3iy"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="RNQ-9u-biP" secondAttribute="bottom" id="8Xz-7y-WQw"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="RNQ-9u-biP" secondAttribute="trailing" id="i55-uK-wmv"/>
+                                    <constraint firstItem="RNQ-9u-biP" firstAttribute="top" secondItem="hup-Mm-658" secondAttribute="top" id="vcw-yu-NIy"/>
                                 </constraints>
                                 <size key="customSize" width="180" height="180"/>
                                 <connections>
@@ -339,7 +339,7 @@
         <image name="table_30x30" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="r6e-GK-Ghf"/>
-        <segue reference="PgX-Xg-iGF"/>
+        <segue reference="NBm-7y-eFn"/>
+        <segue reference="237-id-7JH"/>
     </inferredMetricsTieBreakers>
 </document>
